@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import validator from "validator";
 
-//Schema definition of the input data
+//Schema definition of the user
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -42,6 +42,9 @@ const userSchema = new mongoose.Schema({
     required: true,
     select: false,
     minlength: 8,
+  },
+  token: {
+    type: String
   },
   createdAt: {
     type: Date,
