@@ -7,6 +7,7 @@ import blogRoute from "./routes/blog.route.js"; // Blog routes
 import fileUpload from "express-fileupload"; // Middleware for handling file uploads
 import { v2 as cloudinary } from "cloudinary"; // Cloudinary for image uploads
 import cookieParser from "cookie-parser"; // Middleware to parse cookies
+import cors from "cors"; // Middleware for enabling CORS
 
 // Initialize the Express application
 const app = express();
@@ -21,10 +22,17 @@ const MONGO_URL = process.env.MONGO_URL;
 // ===================== Middlewares =====================
 
 // Parses incoming requests with JSON payloads
-app.use(express.json());
+app.use(express.json()); 
 
 // Parses cookies attached to the client request object
 app.use(cookieParser());
+
+// Enables Cross-Origin Resource Sharing (CORS)
+app.use(cors({
+  origin: process.env.FRONTEND_URL, // Allow requests from the client URL
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+}));
 
 // Enables file uploads and stores temporary files in /tmp directory
 app.use(
