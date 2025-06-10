@@ -10,6 +10,7 @@ import Blogs from './pages/Blogs';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
+import { useAuth } from './context/AuthProvider';
 
 const App = () => {
 
@@ -18,6 +19,9 @@ const App = () => {
   // This can be extended to include more routes as needed
   const location = useLocation();
   const hideNavbarFooter = ["/dashboard", "/login", "/register"].includes(location.pathname);
+
+  const {blogs} = useAuth();
+  console.log(blogs);
 
   return (
     <div>
