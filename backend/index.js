@@ -71,7 +71,7 @@ cloudinary.config({
 // ===================== Root Route =====================
 // A basic route for the root URL to confirm the server is running
 app.get("/", (req, res) => {
-  res.send("Hello Urza and Rahul!");
+  res.send("Backend Server is Running....");
 });
 
 // ===================== Start the Server =====================
