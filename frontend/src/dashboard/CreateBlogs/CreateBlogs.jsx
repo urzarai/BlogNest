@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Trending() {
+function CreateBlogs() {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function Trending() {
   )
 }
 
-export default Trending
+export default CreateBlogs

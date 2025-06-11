@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Contact() {
+function MyProfile() {
   return (
     <div>
-      Contact Page
+      
     </div>
   )
 }
 
-export default Contact
+export default MyProfile

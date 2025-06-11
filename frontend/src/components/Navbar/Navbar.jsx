@@ -1,11 +1,11 @@
 import React from 'react'
 
-function CreateBlog() {
+function Navbar() {
   return (
     <div>
-      
+      Navbar Component
     </div>
   )
 }
 
-export default CreateBlog
+export default Navbar

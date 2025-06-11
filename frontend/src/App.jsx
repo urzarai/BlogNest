@@ -1,45 +1,44 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Creators from './pages/Creators';
-import Blogs from './pages/Blogs';
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
-import { useAuth } from './context/AuthProvider';
+import React from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Navbar from "./components/Navbar/Navbar.jsx";
+import Footer from "./components/Footer/Footer.jsx";
+import Home from "./pages/Home/Home.jsx";
+import Blogs from "./pages/Blogs/Blogs.jsx";
+import About from "./pages/About/About.jsx";
+import Feedback from "./pages/Feedback/Feedback.jsx";
+import Creators from "./pages/Creators/Creators.jsx";
+import Login from "./pages/Auth/Login.jsx";
+import Register from "./pages/Auth/Register.jsx";
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
+import { useAuth } from './context/AuthProvider.jsx';
 
 const App = () => {
 
-  // Determine if the Navbar and Footer should be hidden based on the current route
-  // We don't want to display the Navbar and Footer on certain pages like Dashboard, Login, and Register
-  // This can be extended to include more routes as needed
-  const location = useLocation();
-  const hideNavbarFooter = ["/dashboard", "/login", "/register"].includes(location.pathname);
+    const location = useLocation();
+    const hideNavbarFooter = ["/dashboard", "/login", "/register"].includes(
+        location.pathname
+    );
 
-  const {blogs} = useAuth();
-  console.log(blogs);
+    const {blogs} = useAuth();
+    console.log(blogs);
 
-  return (
-    <div>
-      {!hideNavbarFooter && <Navbar />}
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/blogs' element={<Blogs />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/creators' element={<Creators />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-      </Routes>
-     {!hideNavbarFooter && <Footer />}
-    </div>
+    return (
+        <div>
+            {!hideNavbarFooter && <Navbar />}
+            <Routes>
+                <Route exact path="/" element={<Home />} />
+                <Route exact path="/blogs" element={<Blogs />} />
+                <Route exact path="/about" element={<About />} />
+                <Route exact path="/feedback" element={<Feedback />} />
+                <Route exact path="/creators" element={<Creators />} />
+                <Route exact path="/login" element={<Login />} />
+                <Route exact path="/register" element={<Register />} />
+                <Route exact path="/dashboard" element={<Dashboard />} />
+            </Routes>
 
-  );
-};
+            {!hideNavbarFooter && <Footer />}
+        </div>
+    )
+}
 
-export default App;
+export default App

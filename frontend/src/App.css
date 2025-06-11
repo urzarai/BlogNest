@@ -1,0 +1,32 @@
+:root {
+  --primary-beige: #c2a278;
+  --secondary-beige: #936c4e;
+  --light-beige: #e1c7a5;
+  --dark-beige: #7A6455;
+  --text-dark: #4A3F35;
+  --text-light: #e5d4c3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: var(--light-bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}

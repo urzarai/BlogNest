@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Hero() {
+function Feedback() {
   return (
     <div>
-      
+      Feedback Page
     </div>
   )
 }
 
-export default Hero
+export default Feedback
