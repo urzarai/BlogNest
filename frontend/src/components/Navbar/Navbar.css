@@ -1,0 +1,108 @@
+
+.navbar {
+  background: linear-gradient(90deg, var(--light-beige) 0%, #fff 100%);
+  box-shadow: 0 2px 12px 0 rgba(74,63,53,0.07);
+  padding: 0.8rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-brand a {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--secondary-beige);
+  letter-spacing: 2px;
+  transition: color 0.2s;
+  text-decoration: none;
+}
+
+.navbar-brand a:hover {
+  color: var(--dark-beige);
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.navbar-links a {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  background: var(--light-beige);
+  padding: 0.4rem 1.1rem;
+  border-radius: 20px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  font-weight: 500;
+  box-shadow: none;
+  border: 1.5px solid transparent;
+  text-decoration: none;
+}
+
+.navbar-links a:hover {
+  background: var(--primary-beige);
+  color: var(--dark-beige);
+  border: 1.5px solid var(--primary-beige);
+}
+
+.navbar-login-btn,
+.navbar-dashboard-btn {
+  background: var(--secondary-beige);
+  color: #b9885a;
+  font-weight: bold;
+  padding: 0.45rem 1.6rem;
+  margin-left: 1rem;
+  box-shadow: 0 2px 12px 0 rgba(161,124,95,0.12);
+  border: none;
+  font-size: 1.13rem;
+  letter-spacing: 1px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  border-radius: 6px; 
+  outline: none;
+}
+
+.navbar-login-btn:hover,
+.navbar-dashboard-btn:hover {
+  background: var(--dark-beige);
+  color: var(--text-light) !important;
+  box-shadow: 0 4px 16px 0 rgba(122,100,85,0.14);
+}
+
+
+@media (max-width: 900px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+  .navbar-links {
+    width: 100%;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    padding: 0.7rem 0.5rem;
+  }
+  .navbar-brand a {
+    font-size: 1.3rem;
+  }
+  .navbar-links {
+    gap: 0.5rem;
+  }
+  .navbar-links a,
+  .navbar-login-btn,
+  .navbar-dashboard-btn {
+    font-size: 0.98rem;
+    padding: 0.3rem 0.8rem;
+    margin-left: 0;
+  }
+}

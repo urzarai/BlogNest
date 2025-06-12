@@ -11,7 +11,7 @@ import Login from "./pages/Auth/Login.jsx";
 import Register from "./pages/Auth/Register.jsx";
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import { useAuth } from './context/AuthProvider.jsx';
-
+import './App.css';
 const App = () => {
 
     const location = useLocation();
