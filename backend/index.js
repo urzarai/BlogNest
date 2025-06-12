@@ -20,19 +20,18 @@ const port = process.env.PORT;
 const MONGO_URL = process.env.MONGO_URL;
 
 // ===================== Middlewares =====================
+// Enables Cross-Origin Resource Sharing (CORS)
+app.use(cors({
+  origin: process.env.FRONTEND_URL, // Allow requests from the client URL
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Allowed HTTP methods
+}));
 
 // Parses incoming requests with JSON payloads
 app.use(express.json()); 
 
 // Parses cookies attached to the client request object
 app.use(cookieParser());
-
-// Enables Cross-Origin Resource Sharing (CORS)
-app.use(cors({
-  origin: process.env.FRONTEND_URL, // Allow requests from the client URL
-  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-}));
 
 // Enables file uploads and stores temporary files in /tmp directory
 app.use(
