@@ -14,6 +14,8 @@ export default function Navbar() {
         <Link to="/creators">CREATORS</Link>
         <Link to="/feedback">FEEDBACK</Link>
         <Link to="/contact">CONTACT US</Link>
+      </div>
+      <div>
         <Link to="/dashboard" className="navbar-dashboard-btn">Dashboard</Link>
         <Link to="/login" className="navbar-login-btn">Login</Link>
       </div>

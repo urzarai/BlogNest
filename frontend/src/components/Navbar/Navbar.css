@@ -51,8 +51,8 @@
 
 .navbar-login-btn,
 .navbar-dashboard-btn {
-  background: var(--secondary-beige);
-  color: #b9885a;
+  background: #5e3005;
+  color: #e3b992;
   font-weight: bold;
   padding: 0.45rem 1.6rem;
   margin-left: 1rem;
@@ -67,7 +67,7 @@
 
 .navbar-login-btn:hover,
 .navbar-dashboard-btn:hover {
-  background: var(--dark-beige);
+  background: #5e3005;
   color: var(--text-light) !important;
   box-shadow: 0 4px 16px 0 rgba(122,100,85,0.14);
 }
