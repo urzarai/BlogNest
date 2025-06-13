@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./UpdateBlog.css";
 
 function UpdateBlog() {
@@ -10,6 +10,7 @@ function UpdateBlog() {
   const [category, setCategory] = useState("");
   const [about, setAbout] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigateTo = useNavigate();
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -37,6 +38,7 @@ function UpdateBlog() {
       );
       alert("Blog updated successfully!");
       setLoading(false);
+      navigateTo("/dashboard");
     } catch (error) {
       alert(error.response?.data?.message || "Failed to update blog");
       setLoading(false);

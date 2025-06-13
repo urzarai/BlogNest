@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../../context/AuthProvider";
 import "./CreateBlogs.css";
+import { useNavigate } from "react-router-dom";
 
 function CreateBlogs() {
   const { isAuthenticated } = useAuth();
@@ -10,6 +11,7 @@ function CreateBlogs() {
   const [about, setAbout] = useState("");
   const [blogImage, setBlogImage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigateTo = useNavigate();
 
   const handleImageChange = (e) => {
     setBlogImage(e.target.files[0]);
@@ -43,6 +45,7 @@ function CreateBlogs() {
       setAbout("");
       setBlogImage(null);
       setLoading(false);
+      navigateTo("/dashboard");
     } catch (error) {
       setTitle("");
       setCategory("");

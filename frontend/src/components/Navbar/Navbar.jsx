@@ -4,13 +4,14 @@ import { useAuth } from '../../context/AuthProvider.jsx'
 import './Navbar.css'
 
 export default function Navbar() {
-  const { isAuthenticated, profile } = useAuth()
+  const { isAuthenticated, profile, setIsAuthenticated, setProfile } = useAuth()
   const navigate = useNavigate()
 
   const handleLogout = () => {
     localStorage.removeItem('jwt')
-    navigate('/login')
-    window.location.reload()
+    setIsAuthenticated(false)
+    setProfile(null)
+    navigate('/')
   }
 
   const userRole = profile?.user?.role
