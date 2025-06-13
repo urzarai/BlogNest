@@ -71,7 +71,7 @@ function Register() {
       setProfile(data);
       setIsAuthenticated(true);
       resetForm();
-      navigateTo("/login");
+      navigateTo("/");
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Please fill the required fields"
