@@ -11,10 +11,6 @@
   border: 1px solid var(--light-beige);
 }
 
-.blog-card:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 8px 32px 0 rgba(161,124,95,0.16);
-}
 
 .blog-card-img img {
   width: 100%;

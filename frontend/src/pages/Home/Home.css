@@ -88,10 +88,6 @@
   transition: box-shadow 0.2s;
 }
 
-.creator-card:hover {
-  box-shadow: 0 4px 24px rgba(161, 124, 95, 0.13);
-}
-
 .creator-avatar {
   width: 120px;
   height: 120px;
