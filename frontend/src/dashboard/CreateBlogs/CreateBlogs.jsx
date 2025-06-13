@@ -44,6 +44,9 @@ function CreateBlogs() {
       setBlogImage(null);
       setLoading(false);
     } catch (error) {
+      setTitle("");
+      setCategory("");
+      setAbout("");
       alert(error.response?.data?.message || "Failed to create blog");
       setLoading(false);
     }

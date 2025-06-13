@@ -9,8 +9,6 @@ function UpdateBlog() {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [about, setAbout] = useState("");
-  const [blogImage, setBlogImage] = useState(null);
-  const [preview, setPreview] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -21,7 +19,6 @@ function UpdateBlog() {
         setTitle(data.blogs.title);
         setCategory(data.blogs.category);
         setAbout(data.blogs.about);
-        setPreview(data.blogs.blogImage.url);
       } catch (error) {
         alert("Failed to fetch blog details");
       }
@@ -29,33 +26,14 @@ function UpdateBlog() {
     fetchBlog();
   }, [id]);
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setBlogImage(file);
-    if (file) {
-      setPreview(URL.createObjectURL(file));
-    }
-  };
-
   const handleUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("category", category);
-      formData.append("about", about);
-      if (blogImage) {
-        formData.append("blogImage", blogImage);
-      }
-
       await axios.put(
         `http://localhost:4001/api/blogs/update/${id}`,
-        formData,
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
-        }
+        { title, category, about },
+        { withCredentials: true }
       );
       alert("Blog updated successfully!");
       setLoading(false);
@@ -70,7 +48,7 @@ function UpdateBlog() {
   return (
     <div className="updateblogs-container">
       <h2>Update Blog</h2>
-      <form className="updateblogs-form" onSubmit={handleUpdate} encType="multipart/form-data">
+      <form className="updateblogs-form" onSubmit={handleUpdate}>
         <div className="form-group">
           <label>Title</label>
           <input
@@ -101,22 +79,6 @@ function UpdateBlog() {
             className="form-input"
             rows={6}
           />
-        </div>
-        <div className="form-group">
-          <label>Blog Cover Image</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="form-input"
-          />
-          {preview && (
-            <img
-              src={preview}
-              alt="Blog Preview"
-              className="blog-image-preview"
-            />
-          )}
         </div>
         <button type="submit" className="update-btn" disabled={loading}>
           {loading ? "Updating..." : "Update Blog"}

@@ -50,7 +50,8 @@
 }
 
 .navbar-login-btn,
-.navbar-dashboard-btn {
+.navbar-dashboard-btn,
+.navbar-logout-btn {
   background: #5e3005;
   color: #e3b992;
   font-weight: bold;
@@ -66,7 +67,8 @@
 }
 
 .navbar-login-btn:hover,
-.navbar-dashboard-btn:hover {
+.navbar-dashboard-btn:hover,
+.navbar-logout-btn:hover {
   background: #5e3005;
   color: var(--text-light) !important;
   box-shadow: 0 4px 16px 0 rgba(122,100,85,0.14);

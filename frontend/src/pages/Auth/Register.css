@@ -1,15 +1,6 @@
-:root {
-  --primary-beige: #c2a278;
-  --secondary-beige: #936c4e;
-  --light-beige: #e1c7a5;
-  --dark-beige: #7A6455;
-  --text-dark: #4A3F35;
-  --text-light: #e5d4c3;
-}
-
 .register-page {
   min-height: 100vh;
-  background: #f5f5f5;
+  background: linear-gradient(120deg, var(--light-beige) 0%, #fff 100%);
   display: flex;
   align-items: center;
   justify-content: center;

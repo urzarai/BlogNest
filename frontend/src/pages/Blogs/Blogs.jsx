@@ -25,8 +25,7 @@ function Blogs() {
   const handleExpand = (id) => {
     setExpandedBlogId(expandedBlogId === id ? null : id);
   };
-
-  // Filter blogs by search term (case-insensitive)
+ 
   const filteredBlogs = blogs.filter(blog =>
     blog.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -50,7 +49,9 @@ function Blogs() {
               <div className="blog-image-large">
                 <img src={blog.blogImage.url} alt={blog.title} />
               </div>
-              <span className="blog-category-badge">{blog.category}</span>
+              <div className="blog-category-badge">
+                Category - {blog.category}
+              </div>
             </div>
             <div className="blog-card-meta">
               <img src={blog.adminPhoto} alt={blog.adminName} className="blog-creator-photo" />

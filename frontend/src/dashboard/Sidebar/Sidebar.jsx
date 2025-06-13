@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
 import "./Sidebar.css";
 
 function Sidebar() {
-  const { profile } = useAuth();
+  const { profile, setIsAuthenticated, setProfile } = useAuth();
   const navigate = useNavigate();
+
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
-    navigate("/login");
-    window.location.reload();
+    setIsAuthenticated(false);
+    setProfile(null);
+    navigate("/");
   };
 
   return (

@@ -25,12 +25,13 @@ function Login() {
       setEmail("");
       setPassword("");
       setRole("");
-      alert(data.message || "Login successful"); 
       navigateTo("/");
+      alert(data.message || "Login successful"); 
     } catch (error) {
       setEmail("");
       setPassword("");
       setRole("");
+      navigateTo("/");
     }
   };
 
