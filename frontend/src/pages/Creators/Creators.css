@@ -1,0 +1,124 @@
+.creators-page-beige {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem 2rem 1rem;
+  min-height: 80vh;
+  background: var(--light-beige);
+  border-radius: 16px;
+}
+
+.creators-heading {
+  color: var(--secondary-beige);
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+  padding-top: 2rem;
+}
+
+.creators-searchbar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.creators-searchbar {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px 18px;
+  border: 1.5px solid var(--secondary-beige);
+  border-radius: 8px;
+  font-size: 1.1rem;
+  background: #fff;
+  color: var(--text-dark);
+  outline: none;
+  transition: border 0.2s;
+  box-shadow: 0 1px 4px rgba(122, 100, 85, 0.06);
+}
+
+.creators-searchbar:focus {
+  border: 2px solid var(--primary-beige);
+}
+
+.creators-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.creator-card {
+  display: flex;
+  align-items: center;
+  background: #f9f6f2;
+  border: 1px solid var(--light-beige);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 2.5rem 2rem;
+  margin: 0 auto;
+  max-width: 700px;
+  width: 100%;
+  transition: box-shadow 0.2s;
+}
+
+.creator-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.creator-image {
+  flex: 0 0 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 2.5rem;
+}
+
+.creator-image img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 3px solid var(--secondary-beige);
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.creator-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.creator-info h3 {
+  margin: 0 0 1rem 0;
+  color: var(--dark-beige);
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.creator-info p {
+  margin: 0.5rem 0;
+  color: var(--text-dark);
+  font-size: 1.1rem;
+}
+
+.creator-info strong {
+  color: var(--secondary-beige);
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .creator-card {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 0.5rem;
+  }
+  .creator-image {
+    margin-right: 0;
+    margin-bottom: 1.2rem;
+  }
+  .creator-info {
+    align-items: center;
+    text-align: center;
+  }
+}

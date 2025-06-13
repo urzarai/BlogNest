@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState } from "react";
-import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider.jsx";
 import "./Login.css";
@@ -21,15 +20,17 @@ function Login() {
         { withCredentials: true }
       );
       localStorage.setItem("jwt", data.token);
-      toast.success(data.message || "Login successful");
       setProfile(data);
       setIsAuthenticated(true);
       setEmail("");
       setPassword("");
       setRole("");
+      alert(data.message || "Login successful"); 
       navigateTo("/");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Login failed");
+      setEmail("");
+      setPassword("");
+      setRole("");
     }
   };
 
@@ -48,8 +49,8 @@ function Login() {
               required
             >
               <option value="">Select Role</option>
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
+              <option value="User">User</option>
+              <option value="Admin">Admin</option>
             </select>
           </div>
           
@@ -76,7 +77,7 @@ function Login() {
           </div>
           
           <button type="submit" className="form-submit-btn">
-            Sign In
+            Login
           </button>
         </form>
         

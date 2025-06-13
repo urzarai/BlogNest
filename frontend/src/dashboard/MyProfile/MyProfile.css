@@ -1,0 +1,53 @@
+.myprofile-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  padding: 2rem;
+  max-width: 500px;
+  margin: 2rem auto;
+}
+
+.myprofile-container h2 {
+  color: var(--secondary-beige);
+  margin-bottom: 1.2rem;
+}
+
+.myprofile-details {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.myprofile-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 12px;
+  border: 2px solid var(--secondary-beige);
+  object-fit: cover;
+  background: var(--light-beige);
+}
+
+.myprofile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  color: var(--text-dark);
+  font-size: 1.05rem;
+}
+
+.myprofile-label {
+  color: var(--secondary-beige);
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .myprofile-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .myprofile-avatar {
+    margin-bottom: 1rem;
+  }
+}

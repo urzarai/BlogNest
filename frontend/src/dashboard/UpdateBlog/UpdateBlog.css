@@ -1,4 +1,4 @@
-.createblogs-container {
+.updateblogs-container {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.07);
@@ -7,12 +7,12 @@
   margin: 2rem auto;
 }
 
-.createblogs-container h2 {
+.updateblogs-container h2 {
   color: var(--secondary-beige);
   margin-bottom: 1.2rem;
 }
 
-.createblogs-form {
+.updateblogs-form {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -44,7 +44,7 @@
   background: #fff;
 }
 
-.create-btn {
+.update-btn {
   background: var(--dark-beige);
   color: white;
   padding: 0.9rem 2rem;
@@ -58,12 +58,25 @@
   margin-top: 0.5rem;
 }
 
-.create-btn:hover {
+.update-btn:hover {
   background: var(--secondary-beige);
 }
 
+.blog-image-preview {
+  margin-top: 0.8rem;
+  width: 100%;
+  max-width: 320px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--light-beige);
+  background: var(--light-beige);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+
 @media (max-width: 600px) {
-  .createblogs-container {
+  .updateblogs-container {
     margin: 1rem;
     padding: 1rem;
   }

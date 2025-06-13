@@ -1,0 +1,15 @@
+.dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 2.5rem 2rem;
+  background: #f1decc;
+  min-height: 100vh;
+  overflow-x: auto;
+  display: flex;
+  align-items: flex-start;
+}
