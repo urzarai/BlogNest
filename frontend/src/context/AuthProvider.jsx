@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
         const fetchProfile = async () => {
             try {
                 const { data } = await axios.get(
-                    "http://blog-nest-lake.vercel.app/api/users/my-profile",
+                    "https://blog-nest-lake.vercel.app/api/users/my-profile",
                     {
                         withCredentials: true,
                         headers: {
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
         const fetchBlogs = async () => {
             try {
                 const { data } = await axios.get(
-                    "http://blog-nest-lake.vercel.app/api/blogs/all-blogs",
+                    "https://blog-nest-lake.vercel.app/api/blogs/all-blogs",
                     { withCredentials: true }
                 );
                 setBlogs(data);

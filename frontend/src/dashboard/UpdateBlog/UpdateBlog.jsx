@@ -15,7 +15,7 @@ function UpdateBlog() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const { data } = await axios.get(`http://blog-nest-lake.vercel.app/api/blogs/single-blog/${id}`);
+        const { data } = await axios.get(`https://blog-nest-lake.vercel.app/api/blogs/single-blog/${id}`);
         setBlog(data.blogs);
         setTitle(data.blogs.title);
         setCategory(data.blogs.category);
@@ -32,7 +32,7 @@ function UpdateBlog() {
     setLoading(true);
     try {
       await axios.put(
-        `http://blog-nest-lake.vercel.app/api/blogs/update/${id}`,
+        `https://blog-nest-lake.vercel.app/api/blogs/update/${id}`,
         { title, category, about },
         { withCredentials: true }
       );

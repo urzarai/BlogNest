@@ -15,7 +15,7 @@ function Login() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://blog-nest-lake.vercel.app/api/users/login",
+        "https://blog-nest-lake.vercel.app/api/users/login",
         { email, password, role },
         { withCredentials: true }
       );
