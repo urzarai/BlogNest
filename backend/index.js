@@ -21,7 +21,7 @@ const MONGO_URL = process.env.MONGO_URL;
 // ===================== Middlewares =====================
 // Enables Cross-Origin Resource Sharing (CORS)
 app.use(cors({
-  origin: 'https://blog-nest-qzt4.vercel.app/', // Allow requests from the client URL
+  origin: 'https://blog-nest-qzt4.vercel.app', // Allow requests from the client URL
   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Allowed HTTP methods
 }));
