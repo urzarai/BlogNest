@@ -9,7 +9,7 @@ function MyBlogs() {
 
   const fetchMyBlogs = async () => {
     try {
-      const { data } = await axios.get("http://localhost:4001/api/blogs/my-blogs", {
+      const { data } = await axios.get("http://blog-nest-lake.vercel.app/api/blogs/my-blogs", {
         withCredentials: true,
       });
       setMyBlogs(data);
@@ -25,7 +25,7 @@ function MyBlogs() {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this blog?")) {
       try {
-        await axios.delete(`http://localhost:4001/api/blogs/delete/${id}`, {
+        await axios.delete(`http://blog-nest-lake.vercel.app/api/blogs/delete/${id}`, {
           withCredentials: true,
         });
         setMyBlogs(myBlogs.filter((blog) => blog._id !== id));

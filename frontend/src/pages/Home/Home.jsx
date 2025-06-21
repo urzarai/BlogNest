@@ -12,14 +12,14 @@ export default function Home() {
       try {
         // Fetch recent blogs with credentials
         const blogsRes = await axios.get(
-          "http://localhost:4001/api/blogs/all-blogs",
+          "http://blog-nest-lake.vercel.app/api/blogs/all-blogs",
           { withCredentials: true }
         );
         setRecentBlogs(blogsRes.data.blogs.slice(0, 3));
 
         // Fetch creators (admins) with credentials
         const creatorsRes = await axios.get(
-          "http://localhost:4001/api/users/admins",
+          "http://blog-nest-lake.vercel.app/api/users/admins",
           { withCredentials: true }
         );
         setPopularCreators(creatorsRes.data.admins.slice(0, 4));

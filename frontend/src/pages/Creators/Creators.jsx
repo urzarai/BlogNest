@@ -10,7 +10,7 @@ function Creators() {
     const fetchCreators = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:4001/api/users/admins",
+          "http://blog-nest-lake.vercel.app/api/users/admins",
           { withCredentials: true }
         );
         setCreators(data.admins);
