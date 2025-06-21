@@ -11,7 +11,7 @@ function Blogs() {
     const fetchBlogs = async () => {
       try {
         const { data } = await axios.get(
-          "https://blog-nest-lake.vercel.app/api/blogs/all-blogs",
+          "https://localhost:4001/api/blogs/all-blogs",
           { withCredentials: true }
         );
         setBlogs(data.blogs);

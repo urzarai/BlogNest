@@ -57,7 +57,7 @@ function Register() {
 
     try {
       const { data } = await axios.post(
-        "https://blog-nest-lake.vercel.app/api/users/register",
+        "https://localhost:4001/api/users/register",
         formData,
         {
           withCredentials: true,
