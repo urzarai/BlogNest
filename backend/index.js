@@ -16,38 +16,39 @@ const app = express();
 dotenv.config();
 
 // Retrieve environment variables
+const port = process.env.PORT;
 const MONGO_URL = process.env.MONGO_URL;
 
 // ===================== Middlewares =====================
 // Enables Cross-Origin Resource Sharing (CORS)
 app.use(cors({
-  origin: 'https://blog-nest-qzt4.vercel.app', // Allow requests from the client URL
-  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Allowed HTTP methods
+origin: process.env.FRONTEND_URL, // Allow requests from the client URL
+credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Allowed HTTP methods
 }));
 
 // Parses incoming requests with JSON payloads
-app.use(express.json()); 
+app.use(express.json());
 
 // Parses cookies attached to the client request object
 app.use(cookieParser());
 
 // Enables file uploads and stores temporary files in /tmp directory
 app.use(
-  fileUpload({
-    useTempFiles: true,
-    tempFileDir: "/tmp/",
-  })
+fileUpload({
+useTempFiles: true,
+tempFileDir: "/tmp/",
+})
 );
 
 // ===================== Database Connection =====================
 try {
-  // Connect to MongoDB using mongoose
-  mongoose.connect(MONGO_URL);
-  console.log("Connected to MongoDB");
+// Connect to MongoDB using mongoose
+mongoose.connect(MONGO_URL);
+console.log("Connected to MongoDB");
 } catch (error) {
-  // Log any connection errors
-  console.log(error);
+// Log any connection errors
+console.log(error);
 }
 
 // ===================== Route Definitions =====================
@@ -61,17 +62,19 @@ app.use("/api/blogs", blogRoute);
 // ===================== Cloudinary Configuration =====================
 // Set up Cloudinary with credentials from environment variables
 cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_API_KEY,
-  api_secret: process.env.CLOUD_API_SECRET,
+cloud_name: process.env.CLOUD_NAME,
+api_key: process.env.CLOUD_API_KEY,
+api_secret: process.env.CLOUD_API_SECRET,
 });
 
 // ===================== Root Route =====================
 // A basic route for the root URL to confirm the server is running
 app.get("/", (req, res) => {
-  res.send("Backend Server is Running....");
+res.send("Backend Server is Running....");
 });
 
-// ===================== Export the App for Vercel =====================
-// Export the Express app for Vercel serverless deployment
-export default app;
+// ===================== Start the Server =====================
+// Start the server and listen on the specified port
+app.listen(port, () => {
+console.log(`Server is running on port ${port}`);
+});
