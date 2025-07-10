@@ -14,7 +14,7 @@ function DeleteBlogs() {
     }
     setLoading(true);
     try {
-      await axios.delete(`http://localhost:4001/api/blogs/delete/${blogId}`, {
+      await axios.delete(`https://blognest-gvv7.onrender.com/api/blogs/delete/${blogId}`, {
         withCredentials: true,
       });
       alert("Blog deleted successfully!");

@@ -26,10 +26,15 @@ const __dirname = path.resolve(); // Get the current directory
 
 // ===================== Middlewares =====================
 // Enables Cross-Origin Resource Sharing (CORS)
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://blognest-gvv7.onrender.com"
+];
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL, // Allow requests from the client URL
-  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Allowed HTTP methods
+  origin: allowedOrigins,
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
 }));
 
 // Parses incoming requests with JSON payloads

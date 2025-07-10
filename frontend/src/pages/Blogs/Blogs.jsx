@@ -11,7 +11,7 @@ function Blogs() {
     const fetchBlogs = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:4001/api/blogs/all-blogs",
+          "https://blognest-gvv7.onrender.com/api/blogs/all-blogs",
           { withCredentials: true }
         );
         setBlogs(data.blogs);

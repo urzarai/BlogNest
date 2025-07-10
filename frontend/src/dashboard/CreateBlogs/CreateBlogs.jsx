@@ -35,7 +35,7 @@ function CreateBlogs() {
     formData.append("blogImage", blogImage);
 
     try {
-      await axios.post("http://localhost:4001/api/blogs/create", formData, {
+      await axios.post("https://blognest-gvv7.onrender.com/api/blogs/create", formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       });

@@ -15,7 +15,7 @@ function UpdateBlog() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:4001/api/blogs/single-blog/${id}`);
+        const { data } = await axios.get(`https://blognest-gvv7.onrender.com/api/blogs/single-blog/${id}`);
         setBlog(data.blogs);
         setTitle(data.blogs.title);
         setCategory(data.blogs.category);
@@ -32,7 +32,7 @@ function UpdateBlog() {
     setLoading(true);
     try {
       await axios.put(
-        `http://localhost:4001/api/blogs/update/${id}`,
+        `https://blognest-gvv7.onrender.com/api/blogs/update/${id}`,
         { title, category, about },
         { withCredentials: true }
       );
