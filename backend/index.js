@@ -8,6 +8,7 @@ import fileUpload from "express-fileupload"; // Middleware for handling file upl
 import { v2 as cloudinary } from "cloudinary"; // Cloudinary for image uploads
 import cookieParser from "cookie-parser"; // Middleware to parse cookies
 import cors from "cors"; // Middleware for enabling CORS
+import path from "path"; // Node.js path module for handling file paths
 
 // Initialize the Express application
 const app = express();
@@ -18,6 +19,10 @@ dotenv.config();
 // Retrieve environment variables
 const port = process.env.PORT;
 const MONGO_URL = process.env.MONGO_URL;
+
+// Set the static directory for serving files
+const __dirname = path.resolve(); // Get the current directory
+
 
 // ===================== Middlewares =====================
 // Enables Cross-Origin Resource Sharing (CORS)
@@ -58,6 +63,14 @@ app.use("/api/users", userRoute);
 
 // Routes for blog-related API endpoints
 app.use("/api/blogs", blogRoute);
+
+// Serve static files 
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+// Serve the frontend application
+app.get("/*any", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+});
 
 // ===================== Cloudinary Configuration =====================
 // Set up Cloudinary with credentials from environment variables
