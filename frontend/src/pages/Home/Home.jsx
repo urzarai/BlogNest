@@ -1,23 +1,35 @@
-import React, { useEffect, useState } from 'react'
-import BlogCard from '../../components/BlogCard/BlogCard'
-import axios from 'axios'
-import './Home.css'
+import React, { useEffect, useState } from 'react';
+import BlogCard from '../../components/BlogCard/BlogCard';
+import axios from 'axios';
+import './Home.css';
 
 export default function Home() {
-  const [recentBlogs, setRecentBlogs] = useState([])
-  const [popularCreators, setPopularCreators] = useState([])
+  // Refresh-once-after-redirect logic
+  useEffect(() => {
+    // If not yet reloaded in this session, set flag and reload
+    if (!sessionStorage.getItem('homeReloaded')) {
+      sessionStorage.setItem('homeReloaded', 'true');
+      window.location.reload();
+    } else {
+      // Remove flag after reload to allow future navigations
+      sessionStorage.removeItem('homeReloaded');
+    }
+  }, []);
+
+  const [recentBlogs, setRecentBlogs] = useState([]);
+  const [popularCreators, setPopularCreators] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch recent blogs with credentials
+        // Fetch recent blogs
         const blogsRes = await axios.get(
           "https://blognest-gvv7.onrender.com/api/blogs/all-blogs",
           { withCredentials: true }
         );
         setRecentBlogs(blogsRes.data.blogs.slice(0, 3));
 
-        // Fetch creators (admins) with credentials
+        // Fetch popular creators
         const creatorsRes = await axios.get(
           "https://blognest-gvv7.onrender.com/api/users/admins",
           { withCredentials: true }
@@ -31,7 +43,6 @@ export default function Home() {
 
     fetchData();
   }, []);
-
 
   return (
     <div className="home-page">
@@ -83,5 +94,5 @@ export default function Home() {
         </div>
       </section>
     </div>
-  )
+  );
 }
