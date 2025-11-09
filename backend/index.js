@@ -27,7 +27,7 @@ const __dirname = path.resolve(); // Get the current directory
 // ===================== Middlewares =====================
 // Enables Cross-Origin Resource Sharing (CORS)
 const allowedOrigins = [
-  "http://localhost:5173",
+  "https://localhost:5173",
   "https://blognest-gvv7.onrender.com"
 ];
 
