@@ -2,6 +2,7 @@
 
 **BlogNest** is a full-stack blogging platform built with React for the frontend and Node.js with MongoDB for the backend. It enables users to create, edit, and manage blog posts, while providing robust authentication and role-based access control for both regular users and administrators.
 
+### Live Demo:  https://blognest-gvv7.onrender.com/
 ---
 
 ## Features
