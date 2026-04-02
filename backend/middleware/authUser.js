@@ -4,7 +4,6 @@ import { User } from "../models/user.model.js";
 // Importing jsonwebtoken for token verification
 import jwt from "jsonwebtoken";
 
-
 // ========================= Authentication Middleware =========================
 // Purpose: Verifies that a user is logged in by checking for a valid JWT token
 export const isAutheticated = async (req, res, next) => {
@@ -14,7 +13,9 @@ export const isAutheticated = async (req, res, next) => {
     console.log("Token from cookies (Middleware):", token);
 
     // Decode the token using the secret key
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    if (!token)
+      return res.status(401).json({ message: "Authentication Error!" });
+    const decoded = jwt.verify;
 
     // Find the user from the decoded userId and exclude the password field
     const user = await User.findById(decoded.userId).select("-password");
@@ -40,8 +41,6 @@ export const isAutheticated = async (req, res, next) => {
   }
 };
 
-
-
 // ========================= Authorization Middleware =========================
 // Purpose: Restricts access to specific roles (e.g., only Admins can create blogs)
 export const isAdmin = (...roles) => {
@@ -50,7 +49,7 @@ export const isAdmin = (...roles) => {
       // If the user's role is not included in the allowed roles, deny access
       if (!roles.includes(req.user.role)) {
         return res.status(403).json({
-          error: `${req.user.role}s are not allowed to Create blogs!`
+          error: `${req.user.role}s are not allowed to Create blogs!`,
         });
       }
 

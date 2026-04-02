@@ -10,7 +10,6 @@ import bcrypt from "bcryptjs";
 // Import function to create JWT tokens and set them as cookies
 import createTokenAndSaveCookies from "../jwt/AuthToken.js";
 
-
 // ==================================
 // Controller: Register a new user
 // ==================================
@@ -62,12 +61,12 @@ export const register = async (req, res) => {
     if (user) {
       return res
         .status(400)
-        .json({ message: "User with this Emaill-ID already exists!" });
+        .json({ message: "User with this Email-ID already exists!" });
     }
 
     // Upload user photo to Cloudinary
     const cloudinaryResponse = await cloudinary.uploader.upload(
-      photo.tempFilePath
+      photo.tempFilePath,
     );
 
     // If upload failed, return error
@@ -118,7 +117,6 @@ export const register = async (req, res) => {
   }
 };
 
-
 // ==================================
 // Controller: Log in a user
 // ==================================
@@ -143,6 +141,8 @@ export const login = async (req, res) => {
     }
 
     // Compare provided password with hashed password in DB
+    if (!user)
+      return res.status(400).json({ message: "Invalid email or password!" });
     const isMatch = await bcrypt.compare(password, user.password);
 
     // If credentials are invalid
@@ -179,7 +179,6 @@ export const login = async (req, res) => {
   }
 };
 
-
 // ==================================
 // Controller: Log out a user
 // ==================================
@@ -194,14 +193,13 @@ export const logout = async (req, res) => {
   }
 };
 
-
 // ==================================
 // Controller: Get user profile
 // ==================================
 export const getUserProfile = async (req, res) => {
   try {
     // Assuming `isAuthenticated` middleware attaches user info to req.user
-    const user = await req.user;
+    const user = req.user;
 
     // Send user profile
     res.status(200).json({
@@ -213,7 +211,6 @@ export const getUserProfile = async (req, res) => {
     return res.status(500).json({ message: "Internal server error!" });
   }
 };
-
 
 // ==================================
 // Controller: Get all Admin users
