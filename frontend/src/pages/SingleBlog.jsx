@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-
-const API = "http://localhost:5000/api";
+import axiosInstance from "../../axiosInstance";
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
@@ -16,7 +14,7 @@ export default function SingleBlog() {
   const [error, setError]   = useState("");
 
   useEffect(() => {
-    axios.get(`${API}/blogs/single-blog/${id}`)
+    axiosInstance.get(`/api/blogs/single-blog/${id}`)
       .then((res) => setBlog(res.data.blogs))
       .catch(() => setError("Blog not found."))
       .finally(() => setLoading(false));

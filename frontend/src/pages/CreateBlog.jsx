@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
-const API = "http://localhost:5000/api";
+import axiosInstance from "../../axiosInstance";
 
 const CATEGORIES = [
   "Technology", "Science", "Health", "Lifestyle", "Travel",
@@ -43,7 +41,7 @@ export default function CreateBlog() {
       fd.append("about", form.about);
       fd.append("blogImage", image);
 
-      await axios.post(`${API}/blogs/create`, fd, { withCredentials: true });
+      await axiosInstance.post("/api/blogs/create", fd);
       setSuccess("Blog published successfully!");
       setTimeout(() => navigate("/my-blogs"), 1500);
     } catch (err) {

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../../axiosInstance";
 
 const AuthContext = createContext();
 
@@ -11,10 +11,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const { data } = await axios.get(
-          "http://localhost:5000/api/users/my-profile",
-          { withCredentials: true }
-        );
+        const { data } = await axiosInstance.get("/api/users/my-profile");
         setUser(data.user);
       } catch {
         setUser(null);
@@ -26,37 +23,29 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password, role) => {
-    const { data } = await axios.post(
-      "http://localhost:5000/api/users/login",
+    const { data } = await axiosInstance.post(
+      "/api/users/login",
       { email, password, role },
       { withCredentials: true }
     );
     // Fetch full profile (includes photo etc.)
-    const profile = await axios.get(
-      "http://localhost:5000/api/users/my-profile",
-      { withCredentials: true }
-    );
+    const profile = await axiosInstance.get("/api/users/my-profile");
     setUser(profile.data.user);
     return data;
   };
 
   const logout = async () => {
-    await axios.get("http://localhost:5000/api/users/logout", {
-      withCredentials: true,
-    });
+    await axiosInstance.get("/api/users/logout");
     setUser(null);
   };
 
   const register = async (formData) => {
-    const { data } = await axios.post(
-      "http://localhost:5000/api/users/register",
+    const { data } = await axiosInstance.post(
+      "/api/users/register",
       formData,
       { withCredentials: true }
     );
-    const profile = await axios.get(
-      "http://localhost:5000/api/users/my-profile",
-      { withCredentials: true }
-    );
+    const profile = await axiosInstance.get("/api/users/my-profile");
     setUser(profile.data.user);
     return data;
   };

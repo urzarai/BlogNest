@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-
-const API = "http://localhost:5000/api";
+import axiosInstance from "../../axiosInstance";
 
 export default function Creators() {
   const [creators, setCreators] = useState([]);
   const [loading, setLoading]   = useState(true);
 
   useEffect(() => {
-    axios.get(`${API}/users/admins`)
+    axiosInstance.get("/api/users/admins")
       .then((res) => setCreators(res.data.admins || []))
       .catch(console.error)
       .finally(() => setLoading(false));

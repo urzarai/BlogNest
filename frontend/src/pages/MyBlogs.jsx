@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
-const API = "http://localhost:5000/api";
+import axiosInstance from "../../axiosInstance";
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
@@ -17,7 +15,7 @@ export default function MyBlogs() {
 
   const fetchBlogs = () => {
     setLoading(true);
-    axios.get(`${API}/blogs/my-blogs`, { withCredentials: true })
+    axiosInstance.get("/api/blogs/my-blogs")
       .then((res) => setBlogs(Array.isArray(res.data) ? res.data : []))
       .catch(() => setError("Failed to load your blogs."))
       .finally(() => setLoading(false));
@@ -29,7 +27,7 @@ export default function MyBlogs() {
     if (!window.confirm("Are you sure you want to delete this blog? This cannot be undone.")) return;
     setDeleting(id);
     try {
-      await axios.delete(`${API}/blogs/delete/${id}`, { withCredentials: true });
+      await axiosInstance.delete(`/api/blogs/delete/${id}`);
       setBlogs((prev) => prev.filter((b) => b._id !== id));
     } catch {
       setError("Failed to delete blog.");

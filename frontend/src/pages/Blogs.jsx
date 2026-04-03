@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
-const API = "http://localhost:5000/api";
+import axiosInstance from "../../axiosInstance";
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
@@ -15,7 +13,7 @@ export default function Blogs() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`${API}/blogs/all-blogs`)
+    axiosInstance.get("/api/blogs/all-blogs")
       .then((res) => setBlogs(res.data.blogs || []))
       .catch(console.error)
       .finally(() => setLoading(false));

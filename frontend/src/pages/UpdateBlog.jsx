@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-
-const API = "http://localhost:5000/api";
+import axiosInstance from "../../axiosInstance";
 
 const CATEGORIES = [
   "Technology", "Science", "Health", "Lifestyle", "Travel",
@@ -13,29 +11,26 @@ export default function UpdateBlog() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // If no :id, we show a list of admin's own blogs to pick from
-  const [myBlogs, setMyBlogs]   = useState([]);
-  const [form, setForm]         = useState({ title: "", category: "", about: "" });
+  const [myBlogs, setMyBlogs]       = useState([]);
+  const [form, setForm]             = useState({ title: "", category: "", about: "" });
   const [selectedId, setSelectedId] = useState(id || null);
-  const [loading, setLoading]   = useState(false);
-  const [fetching, setFetching] = useState(false);
-  const [error, setError]       = useState("");
-  const [success, setSuccess]   = useState("");
+  const [loading, setLoading]       = useState(false);
+  const [fetching, setFetching]     = useState(false);
+  const [error, setError]           = useState("");
+  const [success, setSuccess]       = useState("");
 
-  // Load blog list when no id
   useEffect(() => {
     if (!id) {
-      axios.get(`${API}/blogs/my-blogs`, { withCredentials: true })
+      axiosInstance.get("/api/blogs/my-blogs")
         .then((res) => setMyBlogs(Array.isArray(res.data) ? res.data : []))
         .catch(console.error);
     }
   }, [id]);
 
-  // Load selected blog's data
   useEffect(() => {
     if (!selectedId) return;
     setFetching(true);
-    axios.get(`${API}/blogs/single-blog/${selectedId}`)
+    axiosInstance.get(`/api/blogs/single-blog/${selectedId}`)
       .then((res) => {
         const b = res.data.blogs;
         setForm({ title: b.title, category: b.category, about: b.about });
@@ -54,7 +49,7 @@ export default function UpdateBlog() {
     if (form.about.length < 200) { setError("About must be at least 200 characters."); return; }
     setLoading(true);
     try {
-      await axios.put(`${API}/blogs/update/${selectedId}`, form, { withCredentials: true });
+      await axiosInstance.put(`/api/blogs/update/${selectedId}`, form);
       setSuccess("Blog updated successfully!");
       setTimeout(() => navigate("/my-blogs"), 1500);
     } catch (err) {
@@ -72,7 +67,6 @@ export default function UpdateBlog() {
         <p className="section-subtitle">Edit and republish one of your existing articles.</p>
       </div>
 
-      {/* Blog selector (only shown when no :id in URL) */}
       {!id && (
         <div className="form-group" style={{ marginBottom: "2rem" }}>
           <label className="form-label">Select Blog to Edit</label>

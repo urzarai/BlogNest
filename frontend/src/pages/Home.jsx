@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
-const API = "http://localhost:5000/api";
+import axiosInstance from "../../axiosInstance";
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString("en-US", {
@@ -11,17 +9,17 @@ function formatDate(iso) {
 }
 
 export default function Home() {
-  const [blogs, setBlogs]       = useState([]);
+  const [blogs, setBlogs] = useState([]);
   const [creators, setCreators] = useState([]);
-  const [loading, setLoading]   = useState(true);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [blogsRes, creatorsRes] = await Promise.all([
-          axios.get(`${API}/blogs/all-blogs`),
-          axios.get(`${API}/users/admins`),
+          axiosInstance.get("/api/blogs/all-blogs"),
+          axiosInstance.get("/api/users/admins"),
         ]);
         setBlogs(blogsRes.data.blogs || []);
         setCreators(creatorsRes.data.admins || []);
@@ -34,8 +32,8 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const featured    = blogs[0] || null;
-  const sideBlogs   = blogs.slice(1, 4);
+  const featured = blogs[0] || null;
+  const sideBlogs = blogs.slice(1, 4);
   const latestBlogs = blogs.slice(0, 6);
 
   if (loading) {
