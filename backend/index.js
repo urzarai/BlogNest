@@ -17,7 +17,10 @@ const port = process.env.PORT || 5000;
 const MONGO_URL = process.env.MONGO_URL;
 const __dirname = path.resolve();
 
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://blog-nest-rho.vercel.app",
+];
 
 app.use(cors({
   origin: allowedOrigins,
