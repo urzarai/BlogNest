@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axiosInstance from "../../axiosInstance";
+import axiosInstance from "../axiosInstance";
 
 const CATEGORIES = [
   "Technology", "Science", "Health", "Lifestyle", "Travel",

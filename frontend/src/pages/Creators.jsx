@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axiosInstance from "../../axiosInstance";
+import axiosInstance from "../axiosInstance";
 
 export default function Creators() {
   const [creators, setCreators] = useState([]);
