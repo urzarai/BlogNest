@@ -1,56 +1,103 @@
-import React from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom';
-import Navbar from "./components/Navbar/Navbar.jsx";
-import Footer from "./components/Footer/Footer.jsx";
-import Home from "./pages/Home/Home.jsx";
-import Blogs from "./pages/Blogs/Blogs.jsx";
-import Contact from './pages/Contact/Contact.jsx';
-import Feedback from "./pages/Feedback/Feedback.jsx";
-import Creators from "./pages/Creators/Creators.jsx";
-import Login from "./pages/Auth/Login.jsx";
-import Register from "./pages/Auth/Register.jsx";
-import Dashboard from "./pages/Dashboard/Dashboard.jsx";
-import MyBlogs from './dashboard/MyBlogs/MyBlogs.jsx';
-import CreateBlogs from './dashboard/CreateBlogs/CreateBlogs.jsx';
-import MyProfile from './dashboard/MyProfile/MyProfile.jsx';
-import UpdateBlog from './dashboard/UpdateBlog/UpdateBlog.jsx';
-import DeleteBlogs from './dashboard/DeleteBlogs/DeleteBlogs.jsx';
-import { useAuth } from './context/AuthProvider.jsx';
-import './App.css';
-const App = () => {
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+import Layout from "./components/Layout";
 
-    const location = useLocation();
-    const hideNavbarFooter = ["/dashboard", "/login", "/register"].includes(
-        location.pathname
-    ) || location.pathname.startsWith("/dashboard");
+// Pages
+import Home        from "./pages/Home";
+import Blogs       from "./pages/Blogs";
+import SingleBlog  from "./pages/SingleBlog";
+import Creators    from "./pages/Creators";
+import Contact     from "./pages/Contact";
+import Login       from "./pages/Login";
+import Register    from "./pages/Register";
+import CreateBlog  from "./pages/CreateBlog";
+import UpdateBlog  from "./pages/UpdateBlog";
+import MyBlogs     from "./pages/MyBlogs";
 
-    const { blogs } = useAuth();
-    console.log(blogs);
+// ── Guards ────────────────────────────────────────────────────────────────────
 
-    return (
-        <div>
-            {!hideNavbarFooter && <Navbar />}
-            <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route exact path="/blogs" element={<Blogs />} />
-                <Route exact path="/contact" element={<Contact />} />
-                <Route exact path="/feedback" element={<Feedback />} />
-                <Route exact path="/creators" element={<Creators />} />
-                <Route exact path="/login" element={<Login />} />
-                <Route exact path="/register" element={<Register />} />
-                <Route path="/dashboard" element={<Dashboard />}>
-                    <Route index element={<MyBlogs />} /> {/* Default route for dashboard */}
-                    <Route path="myblogs" element={<MyBlogs />} />
-                    <Route path="createblog" element={<CreateBlogs />} />
-                    <Route path="myprofile" element={<MyProfile />} />
-                    <Route path="updateblog/:id" element={<UpdateBlog />} />
-                    <Route path="deleteblog" element={<DeleteBlogs />} />
-                </Route>
-            </Routes>
-
-            {!hideNavbarFooter && <Footer />}
-        </div>
-    )
+// Must be logged in
+function ProtectedRoute({ children }) {
+  const { user, loading } = useAuth();
+  if (loading) return <div className="spinner-wrap"><div className="spinner" /></div>;
+  return user ? children : <Navigate to="/login" replace />;
 }
 
-export default App
+// Must be Admin
+function AdminRoute({ children }) {
+  const { user, loading, isAdmin } = useAuth();
+  if (loading) return <div className="spinner-wrap"><div className="spinner" /></div>;
+  if (!user) return <Navigate to="/login" replace />;
+  if (!isAdmin) return <Navigate to="/" replace />;
+  return children;
+}
+
+// Already logged in → redirect away from auth pages
+function GuestRoute({ children }) {
+  const { user, loading } = useAuth();
+  if (loading) return <div className="spinner-wrap"><div className="spinner" /></div>;
+  return !user ? children : <Navigate to="/" replace />;
+}
+
+// ── Router ────────────────────────────────────────────────────────────────────
+function AppRoutes() {
+  return (
+    <Routes>
+      {/* Public */}
+      <Route path="/"            element={<Layout><Home /></Layout>} />
+      <Route path="/blogs"       element={<Layout><Blogs /></Layout>} />
+      <Route path="/blog/:id"    element={<Layout><SingleBlog /></Layout>} />
+      <Route path="/creators"    element={<Layout><Creators /></Layout>} />
+
+      {/* Logged-in users (User + Admin) */}
+      <Route path="/contact" element={
+        <ProtectedRoute>
+          <Layout><Contact /></Layout>
+        </ProtectedRoute>
+      } />
+
+      {/* Admin only */}
+      <Route path="/create-blog" element={
+        <AdminRoute>
+          <Layout><CreateBlog /></Layout>
+        </AdminRoute>
+      } />
+      <Route path="/update-blog" element={
+        <AdminRoute>
+          <Layout><UpdateBlog /></Layout>
+        </AdminRoute>
+      } />
+      <Route path="/update-blog/:id" element={
+        <AdminRoute>
+          <Layout><UpdateBlog /></Layout>
+        </AdminRoute>
+      } />
+      <Route path="/my-blogs" element={
+        <AdminRoute>
+          <Layout><MyBlogs /></Layout>
+        </AdminRoute>
+      } />
+
+      {/* Auth pages (redirect if already logged in) */}
+      <Route path="/login" element={
+        <GuestRoute><Login /></GuestRoute>
+      } />
+      <Route path="/register" element={
+        <GuestRoute><Register /></GuestRoute>
+      } />
+
+      {/* Fallback */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </BrowserRouter>
+  );
+}
